@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_sd_play/r.dart';
 import 'package:flutter_sd_play/ui/home/page/mine_inviolable_rights.dart';
 import 'package:flutter_sd_play/ui/home/page/sd_college.dart';
 import 'package:flutter_sd_play/ui/register/head_image_page.dart';
@@ -30,12 +31,12 @@ class _HomeState extends State<Home> {
     // TODO: implement build
     tabImages = [
       [
-        getTabImage('images/index1_normal.png'),
-        getTabImage('images/index1_pressed.png')
+        getTabImage(R.imagesIndex1NormalPng),
+        getTabImage(R.imagesIndex1PressedPng)
       ],
       [
-        getTabImage('images/index2_normal.png'),
-        getTabImage('images/index2_pressed.png')
+        getTabImage(R.imagesIndex2NormalPng),
+        getTabImage(R.imagesIndex2PressedPng)
       ]
     ];
 
@@ -122,15 +123,5 @@ class _HomeState extends State<Home> {
         style: new TextStyle(fontSize: 12.0, color: const Color(0xff5c6770)));
   }
 
-  static SlideTransition createTransition(
-      Animation<double> animation, Widget child) {
-    return new SlideTransition(
-      position: new Tween<Offset>(
-        begin: const Offset(1.0, 0.0),
-        end: const Offset(0.0, 0.0),
-      ).animate(animation),
-      child: child,
-    );
-  }
 }
 

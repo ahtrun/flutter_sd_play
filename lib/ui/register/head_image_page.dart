@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sd_play/common/clean_able_text_field.dart';
-import 'package:flutter_sd_play/common/top.dart';
+import 'package:flutter_sd_play/common/common_top.dart';
+import 'package:flutter_sd_play/common/top_state_bar.dart';
 import 'package:flutter_sd_play/utils/common_util.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,8 +19,29 @@ class _HeadImagePageState extends State<HeadImagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new Top(
-        child: _buildTop(context),
+      appBar: new TopStateBar(
+        child: new CommonTop(
+          rightView: InkWell(
+            child: Container(
+              width: 53,
+              height: 22,
+              child: Center(
+                child: Text(
+                  "跳过",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+              ),
+              decoration: new BoxDecoration(
+                  color: Color(0x4c000000),
+                  borderRadius: BorderRadius.all(Radius.circular(2))),
+            ),
+          onTap: (){
+
+          },),
+        ),
       ),
       body: Container(
         width: double.infinity,
@@ -31,8 +53,7 @@ class _HeadImagePageState extends State<HeadImagePage> {
             Container(
               width: double.infinity,
               height: double.infinity,
-              child:
-              Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -61,19 +82,26 @@ class _HeadImagePageState extends State<HeadImagePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text("昵称", style: TextStyle(color: Color(0xff292929),
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500),),
-                      Container(width: 10,),
-                      Container(child: buildTextField("请输入验证码", (content) {
-
-                      }), width: 180, height: 42,
+                      Text(
+                        "昵称",
+                        style: TextStyle(
+                            color: Color(0xff292929),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Container(
+                        width: 10,
+                      ),
+                      Container(
+                        child: buildTextField("请输入验证码", (content) {}),
+                        width: 180,
+                        height: 42,
                       ),
                     ],
                   ),
-
                 ],
-              ),),
+              ),
+            ),
             Positioned(
               child: _checkBtn(),
               left: 43,
@@ -102,13 +130,20 @@ class _HeadImagePageState extends State<HeadImagePage> {
   }
 
   Widget _buildImage() {
-    return InkWell(child: Container(margin: EdgeInsets.only(top: 50),
-      child: CommonUtil.isEmpty(_imageUrl)
-          ? Image.asset('images/image_def.png')
-          : CircleAvatar(backgroundColor: Colors.transparent,
-        backgroundImage: NetworkImage(_imageUrl),),
-      width: 80,
-      height: 80,), onTap: _showPhotoDialog,);
+    return InkWell(
+      child: Container(
+        margin: EdgeInsets.only(top: 50),
+        child: CommonUtil.isEmpty(_imageUrl)
+            ? Image.asset('images/image_def.png')
+            : CircleAvatar(
+                backgroundColor: Colors.transparent,
+                backgroundImage: NetworkImage(_imageUrl),
+              ),
+        width: 80,
+        height: 80,
+      ),
+      onTap: _showPhotoDialog,
+    );
   }
 
   void _showPhotoDialog() {
@@ -118,57 +153,69 @@ class _HeadImagePageState extends State<HeadImagePage> {
           return new Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              new ListView(children: <Widget>[
-
-                InkWell(child: Container(
-                  color: Colors.white,
-                  height: 50,
-                  width: double.infinity,
-                  child: Center(
-                    child: Text('拍照', style: TextStyle(
-                        color: Color(0xff292929)
-                    ),),
+              new ListView(
+                children: <Widget>[
+                  InkWell(
+                    child: Container(
+                      color: Colors.white,
+                      height: 50,
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          '拍照',
+                          style: TextStyle(color: Color(0xff292929)),
+                        ),
+                      ),
+                    ),
+                    onTap: () async {
+                      imageFile = await ImagePicker.pickImage(
+                          source: ImageSource.camera);
+                      Navigator.pop(context);
+                    },
                   ),
-
-                ),
-                  onTap: () async {
-                    imageFile =
-                    await ImagePicker.pickImage(source: ImageSource.camera);
-                    Navigator.pop(context);
-                  },),
-                Container(color: Color(0xfff7f7f7), height: 1,),
-                InkWell(child: Container(
-                  color: Colors.white,
-                  height: 50,
-                  width: double.infinity,
-                  child: Center(
-                    child: Text('从手机相册选择', style: TextStyle(
-                        color: Color(0xff292929)
-                    ),),
+                  Container(
+                    color: Color(0xfff7f7f7),
+                    height: 1,
                   ),
-
-                ),
-                  onTap: () async {
-                    imageFile =
-                    await ImagePicker.pickImage(source: ImageSource.gallery);
-                    Navigator.pop(context);
-                  },),
-                Container(color: Color(0xfff7f7f7), height: 10,),
-                InkWell(child: Container(
-                  color: Colors.white,
-                  height: 50,
-                  width: double.infinity,
-                  child: Center(
-                    child: Text('取消', style: TextStyle(
-                        color: Color(0xff292929)
-                    ),),
+                  InkWell(
+                    child: Container(
+                      color: Colors.white,
+                      height: 50,
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          '从手机相册选择',
+                          style: TextStyle(color: Color(0xff292929)),
+                        ),
+                      ),
+                    ),
+                    onTap: () async {
+                      imageFile = await ImagePicker.pickImage(
+                          source: ImageSource.gallery);
+                      Navigator.pop(context);
+                    },
                   ),
-
-                ),
-                  onTap: () {
-                    Navigator.of(context).pop(); //隐藏弹出框
-                  },),
-              ],
+                  Container(
+                    color: Color(0xfff7f7f7),
+                    height: 10,
+                  ),
+                  InkWell(
+                    child: Container(
+                      color: Colors.white,
+                      height: 50,
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          '取消',
+                          style: TextStyle(color: Color(0xff292929)),
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop(); //隐藏弹出框
+                    },
+                  ),
+                ],
                 shrinkWrap: true,
 
 //                title: Center()new Text("Camera"),
@@ -188,8 +235,7 @@ class _HeadImagePageState extends State<HeadImagePage> {
 //              ),
             ],
           );
-        }
-    );
+        });
   }
 
   void _show() {
@@ -204,7 +250,7 @@ class _HeadImagePageState extends State<HeadImagePage> {
                 title: new Text("Camera"),
                 onTap: () async {
                   imageFile =
-                  await ImagePicker.pickImage(source: ImageSource.camera);
+                      await ImagePicker.pickImage(source: ImageSource.camera);
                   Navigator.pop(context);
                 },
               ),
@@ -213,14 +259,13 @@ class _HeadImagePageState extends State<HeadImagePage> {
                 title: new Text("Gallery"),
                 onTap: () async {
                   imageFile =
-                  await ImagePicker.pickImage(source: ImageSource.gallery);
+                      await ImagePicker.pickImage(source: ImageSource.gallery);
                   Navigator.pop(context);
                 },
               ),
             ],
           );
-        }
-    );
+        });
   }
 
   Widget _buildTop(BuildContext context) {
@@ -245,22 +290,6 @@ class _HeadImagePageState extends State<HeadImagePage> {
           Expanded(
             child: Container(),
           ),
-          Container(
-            width: 53,
-            height: 22,
-            child: Center(
-              child: Text(
-                "跳过",
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white),
-              ),
-            ),
-            decoration: new BoxDecoration(
-                color: Color(0x4c000000),
-                borderRadius: BorderRadius.all(Radius.circular(2))),
-          )
         ],
       ),
     );

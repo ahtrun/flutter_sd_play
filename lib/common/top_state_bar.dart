@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Top extends StatefulWidget implements PreferredSizeWidget {
-  Top({@required this.child,this.color}) : assert(child != null);
+class TopStateBar extends StatefulWidget implements PreferredSizeWidget {
+  TopStateBar({@required this.child,this.color}) : assert(child != null);
   final Widget child;
   Color color;
   @override
@@ -16,7 +16,7 @@ class Top extends StatefulWidget implements PreferredSizeWidget {
 
 
 }
-class MAppBarState extends State<Top> {
+class MAppBarState extends State<TopStateBar> {
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;

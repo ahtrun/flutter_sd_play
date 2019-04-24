@@ -33,5 +33,20 @@ class LoginModel{
   }
 
 
+  ///登出
+  Future logout(Map<String, dynamic> params, Function(bool, Object) callBack) async {
+    HttpUtil.instance.post(
+        Constants.LOGOUT,
+            (data) {
+          callBack(true,"");
+        },
+        params: params,
+        errorCallBack: (errMsg) {
+          print(errMsg);
+          callBack(false,errMsg);
+        });
+  }
+
+
 
 }

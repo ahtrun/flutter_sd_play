@@ -92,7 +92,7 @@ class _State extends State<LoginPage> implements LoginView{
                         child: Column(
                           children: <Widget>[
                             Image.asset(
-                              'images/sd_logo.png',
+                              'images/circle_logo.png',
                               width: 59,
                               height: 59,
                             ),
@@ -100,7 +100,7 @@ class _State extends State<LoginPage> implements LoginView{
                               height: 14,
                             ),
                             Text(
-                              '素，造生活',
+                              '惠玩，才有赚',
                               style: TextStyle(
                                   decoration: TextDecoration.none,
                                   fontSize: 16,

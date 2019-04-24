@@ -12,7 +12,7 @@ UserAccount _$UserAccountFromJson(Map<String, dynamic> json) {
     ..userName = json['userName'] as String
     ..headUrl = json['headUrl'] as String
     ..ifBindMobile = json['ifBindMobile'] as bool
-    ..randomCode = UserAccount().getRandomCode(json['randomCode'])
+    ..randomCode = json['randomCode'] as String
     ..needBindParentUser = json['needBindParentUser'] as bool
     ..ifHaveSetRead = json['ifHaveSetRead'] as bool
     ..sex = json['sex'] as int
@@ -40,8 +40,6 @@ UserAccount _$UserAccountFromJson(Map<String, dynamic> json) {
     ..userMonthTradeAmount = json['userMonthTradeAmount'] as num
     ..vipCount = json['vipCount'] as int;
 }
-
-
 
 Map<String, dynamic> _$UserAccountToJson(UserAccount instance) =>
     <String, dynamic>{

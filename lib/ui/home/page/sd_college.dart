@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sd_play/common/progreess_dialog.dart';
-import 'package:flutter_sd_play/common/top.dart';
+import 'package:flutter_sd_play/common/top_state_bar.dart';
 import 'package:flutter_sd_play/entity/article.dart';
 import 'package:flutter_sd_play/entity/base_page.dart';
 import 'package:flutter_sd_play/entity/college.dart';
@@ -56,7 +56,7 @@ class _SDCollegeState extends State<SDCollege> implements SDCollegeView{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new Top(
+      appBar: new TopStateBar(
         child: _buildTop(context),
       ),
       body: _buildBody(context),
@@ -219,6 +219,7 @@ class _SDCollegeState extends State<SDCollege> implements SDCollegeView{
             child: CircleAvatar(
               radius: 13.5,
               backgroundImage: AssetImage('images/sd_logo.png'),
+              backgroundColor: Colors.transparent,
             ),
           )
         ],

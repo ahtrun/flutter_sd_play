@@ -24,6 +24,11 @@ class Constants{
   static final String GET_USER_INFO = "/user/detail/findUserLeaderDetailById";
   //注册/修改密码短信验证码
   static final String UPDATE_MOBILE_SENDSMS = "/user/sendMoRandmoCode";
-
-
+  // 获取个人信息
+  //get
+  static final String GET_ACCOUNT_INFO = "/user/detail/findUserDetailById";
+  //退出登录
+  static final String LOGOUT = "/user/loginOut.shtml";
+  //获取版本号
+  static final String GET_VERSION = "/core/getCoreSysVer";
 }

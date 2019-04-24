@@ -5,7 +5,7 @@ import 'package:flutter_sd_play/entity/user_account.dart';
 import 'package:flutter_sd_play/mvp/presenter/mine_inviolable_rights_presenter.dart';
 import 'package:flutter_sd_play/mvp/view/mine_inviolable_rights_view.dart';
 import 'package:flutter_sd_play/utils/toast_util.dart';
-
+import 'package:flutter_sd_play/r.dart';
 class MineInviolableRights extends StatefulWidget {
   @override
   _MineInviolableRightsState createState() => _MineInviolableRightsState();
@@ -56,7 +56,7 @@ class _MineInviolableRightsState extends State<MineInviolableRights>
   Widget _buildMain() {
     return Stack(
       children: <Widget>[
-        Image.asset('images/wz_head_bg.png'),
+        Image.asset(R.images20xWzHeadBgPng),
         Column(
           children: <Widget>[
             Container(
@@ -93,6 +93,7 @@ class _MineInviolableRightsState extends State<MineInviolableRights>
                     child: CircleAvatar(
                       radius: 13.5,
                       backgroundImage: AssetImage('images/sd_logo.png'),
+                      backgroundColor: Colors.transparent,
                     ),
                   ),
                 ],
@@ -107,6 +108,7 @@ class _MineInviolableRightsState extends State<MineInviolableRights>
                   height: 71.0,
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(_userAccount.headUrl),
+                    backgroundColor: Colors.transparent,
                   ),
                 ),
                 Column(

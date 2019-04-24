@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sd_play/common/common_top.dart';
 import 'package:flutter_sd_play/common/progreess_dialog.dart';
-import 'package:flutter_sd_play/common/top.dart';
+import 'package:flutter_sd_play/common/top_state_bar.dart';
 import 'package:flutter_sd_play/entity/article.dart';
 import 'package:flutter_sd_play/entity/base_page.dart';
 import 'package:flutter_sd_play/entity/college.dart';
@@ -31,7 +32,7 @@ class _ArticleListPageState extends BaseState<ArticleListPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new Top(
+      appBar: new TopStateBar(
         color: Color(0xfff7f7f7),
         child: _buildTop(context),
       ),
@@ -70,54 +71,59 @@ class _ArticleListPageState extends BaseState<ArticleListPage>
     // TODO: implement dispose
     super.dispose();
     _scrollController.dispose();
-
   }
 
   Widget _buildTop(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 15.0, right: 15.0),
-      color: Color(0xffffffff),
-      height: 50,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          InkWell(
-            child: Image.asset(
-              'images/back2.png',
-              width: 10,
-              height: 18,
-              fit: BoxFit.cover,
-            ),
-            onTap: () {
-              CommonUtil.exit(context, widget);
-            },
-          ),
-          Expanded(
-            child: Center(
-              child: Text(
-                '超级店长',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                  color: Color(0xff333333),
-                ),
-              ),
-            ),
-          ),
-          InkWell(
-            child: Image.asset(
-              'images/share2.png',
-              width: 19,
-              height: 19,
-            ),
-            onTap: () {
-              CommonUtil.exit(context, widget);
-            },
-          )
-        ],
+    return CommonTop(
+      title: "超级店长",
+      rightView: InkWell(
+        child: Image.asset(
+          'images/share2.png',
+          width: 19,
+          height: 19,
+        ),
+        onTap: () {
+          CommonUtil.exit(context, widget);
+        },
       ),
+      backgroundColor: Color(0xfff7f7f7),
     );
   }
+
+//  Container(
+//  padding: EdgeInsets.only(left: 15.0, right: 15.0),
+//  color: Color(0xffffffff),
+//  height: 50,
+//  child: Row(
+//  crossAxisAlignment: CrossAxisAlignment.center,
+//  children: <Widget>[
+//  InkWell(
+//  child: Image.asset(
+//  'images/back2.png',
+//  width: 10,
+//  height: 18,
+//  fit: BoxFit.cover,
+//  ),
+//  onTap: () {
+//  CommonUtil.exit(context, widget);
+//  },
+//  ),
+//  Expanded(
+//  child: Center(
+//  child: Text(
+//  '超级店长',
+//  style: TextStyle(
+//  fontWeight: FontWeight.w500,
+//  fontSize: 18,
+//  color: Color(0xff333333),
+//  ),
+//  ),
+//  ),
+//  ),
+
+//  ],
+//  ),
+//  );
 
 //  Widget _buildBody(BuildContext context) {
 //    if (_articleList.length == 0) {
@@ -135,8 +141,8 @@ class _ArticleListPageState extends BaseState<ArticleListPage>
 //  }
 
   Widget _buildBody(BuildContext context) {
-
-      return Stack(children: <Widget>[
+    return Stack(
+      children: <Widget>[
         RefreshIndicator(
           onRefresh: _getData,
           child: ListView.builder(
@@ -144,10 +150,10 @@ class _ArticleListPageState extends BaseState<ArticleListPage>
             itemCount: _articleList.length,
             itemBuilder: (context, index) => _buildItem(_articleList[index]),
           ),
-        ),_articleList.length==0?getProgressDialog():Container(),
-
-      ],);
-
+        ),
+        _articleList.length == 0 ? getProgressDialog() : Container(),
+      ],
+    );
   }
 
   Widget _buildItem(Article article) {
@@ -187,13 +193,11 @@ class _ArticleListPageState extends BaseState<ArticleListPage>
   void initData() {
     // TODO: implement initData
     _getData();
-
   }
 
   @override
   void initPresenter() {
     // TODO: implement initPresenter
     _presenter = new ArticleListPresenter(this);
-
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sd_play/common/clean_able_text_field.dart';
-import 'package:flutter_sd_play/common/top.dart';
+import 'package:flutter_sd_play/common/common_top.dart';
+import 'package:flutter_sd_play/common/top_state_bar.dart';
 import 'package:flutter_sd_play/ui/register/head_image_page.dart';
 import 'package:flutter_sd_play/ui/register/inviter_list_page.dart';
 import 'package:flutter_sd_play/utils/common_util.dart';
@@ -16,9 +17,9 @@ class _InviteCodePageState extends State<InviteCodePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new Top(
+      appBar: new TopStateBar(
         color: Color(0xfff7f7f7),
-        child: _buildTop(context),
+        child: new CommonTop(title: "请输入邀请码",backgroundColor: Color(0xfff7f7f7),),
       ),
       body: Container(
         color: Colors.white,
@@ -140,39 +141,5 @@ class _InviteCodePageState extends State<InviteCodePage> {
     );
   }
 
-  Widget _buildTop(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 15.0, right: 15.0),
-      color: Color(0xfff7f7f7),
-      height: 50,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          InkWell(
-            child: Image.asset(
-              'images/back2.png',
-              width: 10,
-              height: 18,
-              fit: BoxFit.cover,
-            ),
-            onTap: () {
-              CommonUtil.exit(context, widget);
-            },
-          ),
-          Expanded(
-            child: Center(
-              child: Text(
-                '请输入邀请码',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                  color: Color(0xff333333),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 }
